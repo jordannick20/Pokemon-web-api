@@ -1,4 +1,7 @@
 import { getJSONData } from "./Toolkit.js";
+import { cacheImages } from "./Toolkit.js";
+
+let spinner = new Spinner({ color: "#FF0000", lines: 10 }).spin(document.querySelector(".g-loading-overlay"));
 const ability1 = document.querySelector("#ability1");
 const ability2 = document.querySelector("#ability2");
 
@@ -27,13 +30,21 @@ const img = document.querySelector("#img");
 
 let pokemon = document.querySelector("#pokemon");
 
+let overlay = document.querySelector(".g-loading-overlay");
+
 pokemon.addEventListener("change", () => {
     let poke = pokemon.value
     main(poke);
 });
 
+function hideLoading() {
+    spinner.stop();
+    overlay.style.display = "none";
+}
+
 function Succsess(data) {
     img.src = data.sprites.other["official-artwork"].front_default;
+
     ability1.textContent = data.abilities[0].ability.name;
     ability2.textContent = data.abilities[1].ability.name;
 
@@ -58,6 +69,8 @@ function Succsess(data) {
 
     height1.textContent = data.height;
 
+    hideLoading()
+
 // charmander
 }
 
@@ -70,7 +83,7 @@ function main(poke) {
     const URL = `https://pokeapi.co/api/v2/pokemon/${poke}`
 
     getJSONData(URL, Succsess, Failure, true);
-    
+
 }
 
 main(pokemon.value);

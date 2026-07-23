@@ -2,6 +2,19 @@ body {
   background-color: aqua;
 }
 
+.g-loading-overlay {
+  position: fixed;
+  z-index: 999;
+  left: 0px;
+  top: 0px;
+  right: 0px;
+  bottom: 0px;
+  overflow: show;
+  margin: auto;
+  display: block;
+  background-color: rgb(31, 164, 168);
+}
+
 #ability1 {
 
 }
